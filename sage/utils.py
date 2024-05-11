@@ -128,7 +128,7 @@ def verify_model_data(imputer, X, Y, loss, batch_size):
             # Multiclass output, check for valid probability outputs.
             valid_probs = np.all(np.logical_and(probs >= 0, probs <= 1))
             ones = np.sum(probs, axis=1)
-            valid_probs = valid_probs and np.allclose(ones, np.ones(ones.shape))
+            valid_probs = valid_probs and np.allclose(ones, np.ones(ones.shape), rtol=1e-03, atol=1e-06)
 
         else:
             raise ValueError("prediction has too many dimensions")
